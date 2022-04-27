@@ -8,11 +8,6 @@
     "dev": "nodemon server",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "*.js": [
-      "yarn lint:fix"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@gitlab.com/murilera/nodejs-api-with-express-and-mongodb.git"
