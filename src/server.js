@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const bootcamps = require('./routes/bootcamps.routes')
+const logger = require('./middleware/logger.middleware')
 
 // load envs
 const env = dotenv.config()
@@ -9,17 +10,6 @@ if (env.error) {
 }
 
 const app = express()
-
-const logger = (req, res, next) => {
-  const date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
-
-  console.log(
-    `${date} - ${req.method} ${req.protocol}://${req.get('host')}${
-      req.originalUrl
-    }`
-  )
-  next()
-}
 
 app.use(logger)
 
