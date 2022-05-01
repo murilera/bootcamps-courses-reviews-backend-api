@@ -12,8 +12,6 @@
     "comma-dangle": ["error", "never"],
     "no-unused-vars": 0,
     "no-useless-escape": 0,
-    "prettier": {
-      "space-before-function-paren": ["error", "never"]
-    }
+    "space-before-function-paren": 0
   }
 }
