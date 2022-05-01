@@ -19,11 +19,21 @@ exports.getBootcamps = async (req, res, next) => {
 // @desc    Get single bootcamp
 // @route   GET /api/v1/bootcamps/:id
 // @access  Public
-exports.getBootcamp = (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    msg: `show bootcamps ${req.params.id}`
-  })
+exports.getBootcamp = async (req, res, next) => {
+  try {
+    const bootcamp = await Bootcamp.findById(req.params.id)
+
+    if (!bootcamp) {
+      return res.status(400).json({ success: false })
+    }
+
+    res.status(200).json({
+      success: true,
+      data: bootcamp
+    })
+  } catch (err) {
+    res.status(400).json({ success: false })
+  }
 }
 
 // @desc    Create new bootcamp
