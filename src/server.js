@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 app.use(fileupload())
 
 // set static folder
-app.use(express.static(path.join(__dirname, 'src/public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // mount routers
 app.use('/api/v1/bootcamps', bootcamps)
