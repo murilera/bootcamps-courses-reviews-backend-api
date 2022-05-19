@@ -49,7 +49,7 @@ app.use(fileupload())
 app.use(mongoSanitize())
 
 // set security headers
-app.use(helmet())
+app.use(helmet({ contentSecurityPolicy: false }))
 
 // prevent xxs (scripting been inserted into database then loaded into frontend and executing)
 app.use(xss())
