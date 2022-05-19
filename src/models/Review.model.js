@@ -34,7 +34,7 @@ const ReviewSchema = new mongoose.Schema({
 })
 
 // static method to get avg rating and save
-ReviewSchema.statics.getAverageT = async function (bootcampId) {
+ReviewSchema.statics.getAverageCost = async function (bootcampId) {
   const obj = await this.aggregate([
     {
       $match: { bootcamp: bootcampId }
