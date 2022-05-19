@@ -16,6 +16,8 @@ const reviews = require('./routes/reviews.routes')
 
 // security
 const mongoSanitize = require('express-mongo-sanitize')
+const helmet = require('helmet')
+const xss = require('xss-clean')
 
 // load envs
 const env = dotenv.config()
@@ -42,6 +44,12 @@ app.use(fileupload())
 
 // sanitize data
 app.use(mongoSanitize())
+
+// set security headers
+app.use(helmet())
+
+// prevent xxs (scripting been inserted into database then loaded into frontend and executing)
+app.use(xss())
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')))
