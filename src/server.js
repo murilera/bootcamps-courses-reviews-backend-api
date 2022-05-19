@@ -18,6 +18,8 @@ const reviews = require('./routes/reviews.routes')
 const mongoSanitize = require('express-mongo-sanitize')
 const helmet = require('helmet')
 const xss = require('xss-clean')
+const rateLimit = require('express-rate-limit')
+const hpp = require('hpp')
 
 // load envs
 const env = dotenv.config()
@@ -50,6 +52,16 @@ app.use(helmet())
 
 // prevent xxs (scripting been inserted into database then loaded into frontend and executing)
 app.use(xss())
+
+// rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 15 minutes
+  max: 25 // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+})
+app.use(limiter)
+
+// prevent http param pollution
+app.use(hpp())
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')))
