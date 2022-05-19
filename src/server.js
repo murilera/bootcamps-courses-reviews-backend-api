@@ -14,6 +14,9 @@ const auth = require('./routes/auth.routes')
 const users = require('./routes/users.routes')
 const reviews = require('./routes/reviews.routes')
 
+// security
+const mongoSanitize = require('express-mongo-sanitize')
+
 // load envs
 const env = dotenv.config()
 if (env.error) {
@@ -36,6 +39,9 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
 // file uploading
 app.use(fileupload())
+
+// sanitize data
+app.use(mongoSanitize())
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')))
