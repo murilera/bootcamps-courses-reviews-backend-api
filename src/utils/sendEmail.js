@@ -13,13 +13,14 @@ const sendEmail = async (options) => {
 
   // send mail with defined transport object
   const message = {
-    from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}`,
+    from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
     to: options.email,
     subject: options.subject,
     text: options.message
   }
 
-  const info = await transporter.sendEmail(message)
-
+  const info = await transporter.sendMail(message)
   console.log(`Message sent: ${info.messageId}`.green)
 }
+
+module.exports = sendEmail
