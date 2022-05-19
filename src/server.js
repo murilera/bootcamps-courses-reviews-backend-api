@@ -20,6 +20,7 @@ const helmet = require('helmet')
 const xss = require('xss-clean')
 const rateLimit = require('express-rate-limit')
 const hpp = require('hpp')
+const cors = require('cors')
 
 // load envs
 const env = dotenv.config()
@@ -62,6 +63,9 @@ app.use(limiter)
 
 // prevent http param pollution
 app.use(hpp())
+
+// enable CORS
+app.use(cors())
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')))
