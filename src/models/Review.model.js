@@ -19,7 +19,7 @@ const ReviewSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    dafault: Date.now()
+    default: Date.now
   },
   bootcamp: {
     type: mongoose.Schema.ObjectId,
