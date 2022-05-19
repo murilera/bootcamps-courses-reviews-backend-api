@@ -34,7 +34,7 @@ const ReviewSchema = new mongoose.Schema({
 })
 
 // static method to get avg rating and save
-ReviewSchema.statics.getAverageRating = async function (bootcampId) {
+ReviewSchema.statics.getAverageT = async function (bootcampId) {
   const obj = await this.aggregate([
     {
       $match: { bootcamp: bootcampId }
@@ -56,14 +56,14 @@ ReviewSchema.statics.getAverageRating = async function (bootcampId) {
   }
 }
 
-// Call getAverageRating after save
+// Call getAverageCost after save
 ReviewSchema.post('save', async function () {
-  await this.constructor.getAverageRating(this.bootcamp)
+  await this.constructor.getAverageCost(this.bootcamp)
 })
 
-// Call getAverageRating before remove
+// Call getAverageCost before remove
 ReviewSchema.pre('remove', async function () {
-  await this.constructor.getAverageRating(this.bootcamp)
+  await this.constructor.getAverageCost(this.bootcamp)
 })
 
 // prevent user from submitting more than one review per bootcamp
